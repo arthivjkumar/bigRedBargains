@@ -23,7 +23,6 @@ body {
   .modal {
     position: relative;
     background-color: white;
-    /* min-height: 50%; */
     height: fit-content;
     width: 50%;
     text-align: center;

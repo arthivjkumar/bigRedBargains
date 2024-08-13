@@ -41,7 +41,7 @@ const client = new MongoClient(mongoURI, {
 
 app.post('/addItem', cors(), async (req, res) => {
   collection = client.db("BigRedBargains").collection("Listings");
-  const { seller, name, description, image } = req.body
+  const { seller, name, description, cost, image } = req.body
   const itemId = uuidv4(); // generates unique identifier for item
   // const {id, email, iat} = jwt.verify(token, JWT_SECRET)
   try {
@@ -50,6 +50,7 @@ app.post('/addItem', cors(), async (req, res) => {
       itemID: itemId,
       name: name,
       description: description,
+      cost: cost,
       image: image,
       saved: false
     };
@@ -78,6 +79,7 @@ app.get('/getItems', async (req, res) => {
       item.itemID,
       item.name.charAt(0).toUpperCase() + item.name.slice(1),
       item.description,
+      item.cost,
       item.image,
       item.saved
     ])

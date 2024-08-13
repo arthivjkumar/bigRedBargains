@@ -6,6 +6,9 @@
   font-style: normal;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -21,7 +24,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Baloo 2';
+  font-family: 'Inter';
 }
 
 code {

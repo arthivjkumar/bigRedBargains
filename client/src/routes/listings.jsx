@@ -5,9 +5,11 @@ import addIcon from '../assets/images/add.png';
 import sortIcon from '../assets/images/sort.png';
 import Navbar from '../components/navbar/navbar';
 import AddListing from '../components/addListing/addListing';
+import Filter from '../components/filter/filter'
 
 function Listings() {
   const [open, setOpen] = useState(false);
+  const [openFilterModal, setOpenFilter] = useState(false);
   const [searchInput, setSearchInput] = useState("");
 
   const handleSearchChange = (event) => {
@@ -21,6 +23,14 @@ function Listings() {
   const handleOpen = () => {
     setOpen(true);
   };
+
+  const openFilter = () => {
+    setOpenFilter(true);
+  }
+
+  const closeFilter = () => {
+    setOpenFilter(false);
+  }
   return (
     <div className="Listings">
       <Navbar />
@@ -34,10 +44,11 @@ function Listings() {
             value={searchInput}
             onChange={handleSearchChange}
           />
-          <img id="sortIcon" src={sortIcon} alt="sort icon" />
+          <img id="sortIcon" src={sortIcon} alt="sort icon" onClick = {openFilter}/>
         </div>
         <div className="table">
           <AddListing isOpen={open} onClose={handleClose} />
+          <Filter isOpen = {openFilterModal} onClose = {closeFilter} />
           <Item searchQuery={searchInput}/>
         </div>
       </header>

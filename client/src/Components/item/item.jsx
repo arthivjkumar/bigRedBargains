@@ -25,8 +25,9 @@ export async function getItems() {
       id: item[0],
       name: item[1],
       description: item[2],
-      image: item[3],
-      saved: item[4]
+      cost: item[3],
+      image: item[4],
+      saved: item[5]
     }));
 
     // Set liked stated for all liked items
@@ -63,12 +64,12 @@ function Item({ searchQuery }) {
     fetchData();
   }, []); // Dependency array is empty, ensuring this effect runs only once on mount
 
-  async function likeItem(index, itemId) {
+  async function likeItem(itemId) {
     // Need to save/unsave this liked item into the DB
     // Check if this id is in the currently saved items, if it is not:
-    if (savedItems.has(itemId) == false) {
+    if (savedItems.has(itemId) === false) {
       const formData = {
-        itemId: data[index].id,
+        itemId: itemId,
         saved: true
       };
 
@@ -97,7 +98,7 @@ function Item({ searchQuery }) {
     else{ // need to unsave item
       try {
         const formData = {
-          itemId: data[index].id,
+          itemId: itemId,
           saved: false
         };
 
@@ -124,10 +125,21 @@ function Item({ searchQuery }) {
     }
   };
 
-  const filteredData = data.filter((item) =>
-    item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    item.description.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredData = data.filter((item) => {
+    return item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+           item.description.toLowerCase().includes(searchQuery.toLowerCase());
+  });
+  
+  filteredData.forEach((item) => {
+    let itemElement = document.querySelector(`[data-item-id="${item.id}"]`);
+    if (itemElement) {
+      if (savedItems.has(item.id)) {
+        itemElement.classList.add('item-liked');
+      } else {
+        itemElement.classList.remove('item-liked'); // Optionally remove the class if not saved
+      }
+    }
+  });
 
   return (
     <div className="Item">
@@ -143,7 +155,7 @@ function Item({ searchQuery }) {
                   className="love-icon"
                   src={heartIcon}
                   alt="loveIcon"
-                  onClick={() => likeItem(index, item.id)} // Consider using unique identifier if available
+                  onClick={() => likeItem(item.id)} // Consider using unique identifier if available
                 />
                 <div className="image">
                   <img src={item.image || sampleItem} alt={item.name || "Sample"} />
@@ -151,7 +163,7 @@ function Item({ searchQuery }) {
                 <div className="info">
                   <h2 className="productName">{item.name}</h2>
                   <p className="description">{item.description}</p>
-                  <h3 className="cost">$30</h3> {/* Fallback price */}
+                  <h3 className="cost">{"$" + item.cost || "0"}</h3> {/* Fallback price */}
                 </div>
               </div>
             ))

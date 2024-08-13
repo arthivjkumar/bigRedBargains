@@ -6,12 +6,14 @@ function AddListing({ isOpen, onClose }) {
   async function createItem() {
     const itemName = document.querySelector("[name=itemName]").value;
     const itemDescription = document.querySelector("[name=itemDescription]").value;
+    const itemCost = document.querySelector("[name = itemCost").value;
     const itemImage = document.querySelector("[name=itemImage]").value;
 
     const formData = {
       seller: "kln47",
       name: itemName,
       description: itemDescription,
+      cost: itemCost,
       image: itemImage
     };
 

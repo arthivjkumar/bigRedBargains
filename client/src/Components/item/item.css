@@ -46,6 +46,10 @@ body {
   .love-icon.item-liked {
     filter: grayscale(0)
   }
+
+  h2, p, h3{
+    font-family: "Inter";
+  }
 }
 
 .item:hover{

@@ -16,8 +16,6 @@
     position: relative;
     margin: auto;
     background-color: white;
-    border-radius: 25px;
-    /* min-height: 50%; */
     width: 50%;
     position: relative;
   }
@@ -31,6 +29,10 @@
 
   h1 {
     width: 100%;
+  }
+
+  h1, h3{
+    font-family: "Inter";
   }
 
   .Table {
@@ -48,7 +50,6 @@
       position: relative;
       background-color: #D9D9D9;
       font-family:"inter";
-      border-radius: 25px;
       margin:auto;
       width: 10vw;
       color:black;
@@ -93,7 +94,7 @@
       color:white;
       border-style:none;
       padding: 1vw 2vw;
-
+      transition: opacity 0.5s;
     }
 
     button:hover{
